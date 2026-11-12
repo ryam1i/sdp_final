@@ -8,11 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- * Observer pattern: the Subject.
- * Owns the actual prices and stock levels and notifies every subscribed
- * {@link InventoryObserver} (Cart, AdminDashboard, ...) when they change.
- */
 public class Inventory {
     private final Map<String, Double> prices = new HashMap<>();
     private final Map<String, Integer> stock = new HashMap<>();

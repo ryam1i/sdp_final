@@ -10,10 +10,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * Facade pattern: one simple call, placeOrder(), hides the checkout workflow
- * across several subsystems (Inventory, PaymentService, ShippingService).
- */
 public class CheckoutFacade {
     private final Inventory inventory;
     private final PaymentService payment;

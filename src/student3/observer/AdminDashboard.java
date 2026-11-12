@@ -6,10 +6,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * Observer pattern: a Concrete Observer.
- * Shows the administrator live price/stock changes and warns on low stock.
- */
 public class AdminDashboard implements InventoryObserver {
     private static final int LOW_STOCK_THRESHOLD = 3;
 

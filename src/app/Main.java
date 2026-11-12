@@ -17,17 +17,14 @@ import student3.observer.AdminDashboard;
 import student3.observer.Inventory;
 import student3.observer.OutOfStockException;
 
-/** End-to-end demo: all six patterns working together. */
 public class Main {
     public static void main(String[] args) {
-        // 1. Factory Method + Builder
         step("1. FACTORY METHOD + BUILDER: create products");
         ElectronicsFactory electronics = new ElectronicsFactory();
         ProductFactory clothing = new ClothingFactory();
         Product laptop = electronics.createLaptop("L1", 16, 512, "Silver");
         Product tShirt = clothing.getProduct("T1");
 
-        // Observer wiring
         Inventory inventory = new Inventory();
         inventory.register(laptop, 4);
         inventory.register(tShirt, 10);
@@ -39,13 +36,11 @@ public class Main {
             dashboard.track(p.getId(), inventory.getPrice(p.getId()), inventory.getStock(p.getId()));
         }
 
-        // 2. Decorator
         step("2. DECORATOR: add to cart with Gift Wrap + Extended Warranty");
         cart.addItem(new ExtendedWarranty(new GiftWrap(new BasicCartItem(laptop, 1))));
         cart.addItem(new BasicCartItem(tShirt, 2));
         cart.printCart();
 
-        // 3. Strategy
         step("3. STRATEGY: 10% discount");
         cart.setDiscountStrategy(new PercentageDiscount(10));
         cart.printCart();
@@ -53,19 +48,16 @@ public class Main {
         cart.setDiscountStrategy(new ThresholdDiscount());
         cart.printCart();
 
-        // 4. Observer
         step("4. OBSERVER: price changes in inventory, cart updates itself");
         inventory.updatePrice("L1", 280000);
         cart.printCart();
 
-        // 5. Facade
         step("5. FACADE: placeOrder()");
         CheckoutFacade checkout = new CheckoutFacade(
                 inventory, new SimplePaymentService(), new SimpleShippingService());
         checkout.placeOrder(cart, "Astana, Kabanbay Batyr 53");
         dashboard.printSnapshot();
 
-        // 6. Failure scenario
         step("6. FACADE: order exceeds stock");
         Cart bigCart = new Cart();
         bigCart.addItem(new BasicCartItem(laptop, 10));
