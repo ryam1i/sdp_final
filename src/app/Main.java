@@ -41,6 +41,7 @@ public class Main {
         cart.addItem(new BasicCartItem(tShirt, 2));
         cart.printCart();
 
+        // 3. Strategy
         step("3. STRATEGY: 10% discount");
         cart.setDiscountStrategy(new PercentageDiscount(10));
         cart.printCart();
