@@ -1,0 +1,27 @@
+@startuml
+interface Product {
+  +getId(): String
+  +getName(): String
+  +getPrice(): double
+  +getDescription(): String
+}
+class Laptop
+class TShirt
+Product <|.. Laptop
+Product <|.. TShirt
+
+abstract class ProductFactory {
+  #createProduct(id: String): Product
+  +getProduct(id: String): Product
+}
+class ElectronicsFactory {
+  +createLaptop(...): Product
+}
+class ClothingFactory
+
+ProductFactory <|-- ElectronicsFactory
+ProductFactory <|-- ClothingFactory
+ProductFactory ..> Product : creates
+ElectronicsFactory ..> Laptop
+ClothingFactory ..> TShirt
+@enduml

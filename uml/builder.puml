@@ -1,0 +1,22 @@
+@startuml
+class Laptop {
+  -id: String
+  -ram: int
+  -storage: int
+  -color: String
+  -warranty: boolean
+  -price: double
+}
+class "Laptop.Builder" as Builder {
+  +setName(name: String): Builder
+  +setRam(ram: int): Builder
+  +setStorage(storage: int): Builder
+  +setColor(color: String): Builder
+  +addWarranty(): Builder
+  +build(): Laptop
+}
+class ElectronicsFactory
+
+Builder ..> Laptop : builds
+ElectronicsFactory ..> Builder : uses
+@enduml
